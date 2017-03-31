@@ -28,12 +28,10 @@ init: dependencies
 	PATH=$(PATH) terraform init tf output/tf
 
 provision: dependencies
-	PATH=$(PATH) terraform version
 	PATH=$(PATH) terraform plan -var-file=vars/$(ENVIRONMENT).tfvars output/tf
 	PATH=$(PATH) terraform apply -var-file=vars/$(ENVIRONMENT).tfvars output/tf
 
 destroy:
-	PATH=$(PATH) terraform version
 	PATH=$(PATH) terraform plan -destroy -var-file=vars/$(ENVIRONMENT).tfvars output/tf
-	PATH=$(PATH) terraform destroy -var-file=vars/$(ENVIRONMENT).tfvars output/tf
+	PATH=$(PATH) terraform destroy -force -var-file=vars/$(ENVIRONMENT).tfvars output/tf
 
